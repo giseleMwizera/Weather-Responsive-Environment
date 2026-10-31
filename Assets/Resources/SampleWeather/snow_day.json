@@ -1,0 +1,15 @@
+{
+  "coord": { "lon": -21.9426, "lat": 64.1466 },
+  "weather": [ { "id": 601, "main": "Snow", "description": "snow", "icon": "13d" } ],
+  "base": "stations",
+  "main": { "temp": -2.4, "feels_like": -7.9, "temp_min": -3.0, "temp_max": -1.6, "pressure": 998, "humidity": 86 },
+  "visibility": 2500,
+  "wind": { "speed": 6.4, "deg": 30 },
+  "clouds": { "all": 100 },
+  "dt": 1761912000,
+  "sys": { "country": "IS", "sunrise": 1761897600, "sunset": 1761927900 },
+  "timezone": 0,
+  "id": 3413829,
+  "name": "Reykjavik",
+  "cod": 200
+}

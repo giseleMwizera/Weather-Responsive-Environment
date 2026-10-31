@@ -1,0 +1,15 @@
+{
+  "coord": { "lon": 10.7522, "lat": 59.9139 },
+  "weather": [ { "id": 600, "main": "Snow", "description": "light snow", "icon": "13n" } ],
+  "base": "stations",
+  "main": { "temp": -4.1, "feels_like": -8.2, "temp_min": -5.0, "temp_max": -3.3, "pressure": 1006, "humidity": 90 },
+  "visibility": 3000,
+  "wind": { "speed": 3.5, "deg": 10 },
+  "clouds": { "all": 100 },
+  "dt": 1761940800,
+  "sys": { "country": "NO", "sunrise": 1761893000, "sunset": 1761925200 },
+  "timezone": 3600,
+  "id": 3143244,
+  "name": "Oslo",
+  "cod": 200
+}
