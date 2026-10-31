@@ -18,6 +18,10 @@ public class WeatherUIController : MonoBehaviour
     [SerializeField] TMP_Text validationText;
     [SerializeField] Button refreshButton;
 
+    [Header("API key (for the WebGL build)")]
+    [SerializeField] TMP_InputField apiKeyInput;
+    [SerializeField] Button saveKeyButton;
+
     [Header("Test mode")]
     [SerializeField] TMP_Dropdown sampleDropdown;
     [SerializeField] Button sampleButton;
@@ -73,6 +77,7 @@ public class WeatherUIController : MonoBehaviour
         customButton.onClick.AddListener(OnCustomCoordinatesSubmitted);
         refreshButton.onClick.AddListener(weatherService.Refresh);
         sampleButton.onClick.AddListener(OnSampleRequested);
+        saveKeyButton.onClick.AddListener(OnSaveKey);
     }
 
     void OnEnable()
@@ -99,6 +104,7 @@ public class WeatherUIController : MonoBehaviour
         testModeBanner.SetActive(false);
         validationText.text = "";
         refreshButton.interactable = false;
+        ShowKeyHint();
     }
 
     // Current time at the location: UTC now plus the offset the API returned.
@@ -139,6 +145,27 @@ public class WeatherUIController : MonoBehaviour
         SampleScenario scenario = SampleWeatherProvider.Scenarios[sampleDropdown.value];
         locationDropdown.SetValueWithoutNotify(0);
         weatherService.RequestSample(scenario);
+    }
+
+    void OnSaveKey()
+    {
+        if (string.IsNullOrWhiteSpace(apiKeyInput.text))
+        {
+            validationText.text = "Paste your OpenWeather API key first.";
+            return;
+        }
+
+        weatherService.SaveApiKey(apiKeyInput.text);
+        apiKeyInput.text = "";   // the key is never left on screen
+        validationText.text = "";
+        ShowKeyHint();
+    }
+
+    void ShowKeyHint()
+    {
+        ((TMP_Text)apiKeyInput.placeholder).text = weatherService.HasApiKey
+            ? "Key saved (paste a new one to replace)"
+            : "Paste OpenWeather API key";
     }
 
     // ---------- Event handlers ----------

@@ -7,6 +7,7 @@ using UnityEngine;
 public class WeatherService : MonoBehaviour
 {
     const string ApiKeyResource = "WeatherApiKey";   // Assets/Resources/WeatherApiKey.txt (git-ignored)
+    const string SavedKeyName = "OpenWeatherApiKey";
 
     public event Action<WeatherRequest> RequestStarted;
     public event Action<WeatherReport> WeatherUpdated;
@@ -73,9 +74,24 @@ public class WeatherService : MonoBehaviour
             WeatherFailed?.Invoke(parsed.Error);
     }
 
+    // Used by the API key field in the UI, so the WebGL build on GitHub Pages ships without a key.
+    // PlayerPrefs is browser storage in WebGL, so the key is remembered on that computer only.
+    public void SaveApiKey(string key)
+    {
+        key = key.Trim();
+        PlayerPrefs.SetString(SavedKeyName, key);
+        PlayerPrefs.Save();
+        liveProvider = new OpenWeatherProvider(key);
+    }
+
+    public bool HasApiKey => !string.IsNullOrEmpty(LoadApiKey());
+
+    // The local key file wins (Unity editor), otherwise the key saved from the UI.
     static string LoadApiKey()
     {
         TextAsset keyFile = Resources.Load<TextAsset>(ApiKeyResource);
-        return keyFile != null ? keyFile.text.Trim() : null;
+        if (keyFile != null && keyFile.text.Trim().Length > 0)
+            return keyFile.text.Trim();
+        return PlayerPrefs.GetString(SavedKeyName, "");
     }
 }

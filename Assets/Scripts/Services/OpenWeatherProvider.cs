@@ -22,7 +22,7 @@ public class OpenWeatherProvider : IWeatherProvider
         if (string.IsNullOrWhiteSpace(apiKey))
         {
             onComplete(RequestResult<string>.Fail(
-                "No API key found. Add your key to Assets/Resources/WeatherApiKey.txt (see README). Test mode still works."));
+                "No API key yet. Paste your OpenWeather key in the API key field and click Save key. Test mode works without a key."));
             yield break;
         }
 

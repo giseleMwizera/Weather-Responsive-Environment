@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+  <title>Weather Explorer</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #0f141c; }
+    #unity-canvas { width: 100%; height: 100%; display: block; background: #0f141c; }
+    #loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+               color: #e8eef7; font: 16px system-ui, sans-serif; gap: 12px; }
+    #bar { width: 240px; height: 6px; background: #263040; border-radius: 3px; overflow: hidden; }
+    #fill { width: 0; height: 100%; background: #4099f2; }
+  </style>
+</head>
+<body>
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
+  <div id="loading"><div>Loading Weather Explorer...</div><div id="bar"><div id="fill"></div></div></div>
+  <script src="Build/WebGL.loader.js"></script>
+  <script>
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/WebGL.data",
+      frameworkUrl: "Build/WebGL.framework.js",
+      codeUrl: "Build/WebGL.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DefaultCompany",
+      productName: "Weather Explorer",
+      productVersion: "0.1.0",
+    }, function (progress) {
+      document.querySelector("#fill").style.width = (100 * progress) + "%";
+    }).then(function () {
+      document.querySelector("#loading").remove();
+    }).catch(function (message) {
+      document.querySelector("#loading").textContent = "Could not load: " + message;
+    });
+  </script>
+</body>
+</html>

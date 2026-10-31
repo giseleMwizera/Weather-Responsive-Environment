@@ -4,15 +4,16 @@ Unity app that shows the current weather for a location using the OpenWeather AP
 
 Unity 6000.6.7f1 (URP), built for WebGL.
 
+**Live WebGL build:** https://giselemwizera.github.io/Weather-Responsive-Environment/
+
 ## API key setup
 
-The key is not committed. To run the project:
+The key is never committed. Get a free key at [openweathermap.org](https://openweathermap.org/) (My API keys), then:
 
-1. Get a free key at [openweathermap.org](https://openweathermap.org/) (My API keys).
-2. Create `Assets/Resources/WeatherApiKey.txt`.
-3. Paste only the key into it and save.
+- **WebGL build:** paste the key in the **API key** field and click **Save key**. It is stored in your browser only.
+- **Unity editor:** create `Assets/Resources/WeatherApiKey.txt` and paste only the key into it. The file is in `.gitignore`.
 
-The file is in `.gitignore`. Without it, test mode still works.
+Test mode works without a key.
 
 ## Run
 
